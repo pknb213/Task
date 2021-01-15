@@ -137,11 +137,14 @@ def date_query(args, device=None):
 
 @app.get("/")
 async def basic_route(request: Request):
+    # todo : 가전사 소속 총 데이터 수 반환
     end_point = "_count"
-    query = "{}*/{}".format(parse["hyundai"], end_point)
-    url = ELASTICSEARCH_SERVER_IP + query
-    res = requests.get(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'))
-    res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.keys()))
+    try:
+        query = "{}*/{}".format(parse["hyundai"], end_point)
+        url = ELASTICSEARCH_SERVER_IP + query
+        res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.keys()))
+    except Exception as e:
+        raise e
     print(url)
     payload = PAYLOAD(request, "hyundai").body()
     payload["count"] = res.json()['count']
@@ -155,9 +158,12 @@ async def abc(partner_id: str, request: Request):
     if partner_id not in partner:
         raise HTTPException(status_code=404, detail="partner_id error: 0: Hundae Rental Care 1: Everybot 2: Grib 3: Chungwoo C&T")
     end_point = "_count"
-    query = "{}*/{}".format(parse[partner_id], end_point)
-    url = ELASTICSEARCH_SERVER_IP + query
-    res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.values()))
+    try:
+        query = "{}*/{}".format(parse[partner_id], end_point)
+        url = ELASTICSEARCH_SERVER_IP + query
+        res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.values()))
+    except Exception as e:
+        raise e
     print(url)
     payload = PAYLOAD(request, partner_id).body()
     payload["count"] = res.json()['count']
@@ -166,15 +172,18 @@ async def abc(partner_id: str, request: Request):
 
 @app.get("/api/v1/{partner_id}/{model_name}")
 async def bcd(partner_id: str, model_name: str, request: Request):
-    # todo : 가전사 소속 특정 가전 모델 관련 분석 결과
+    # todo : 가전사 소속 특정 모델 관련 분석 결과
     if partner_id not in partner:
         raise HTTPException(status_code=404, detail="partner_id error: 0: Hundae Rental Care 1: Everybot 2: Grib 3: Chungwoo C&T")
     elif model_name not in models:
         raise HTTPException(status_code=404, detail="model_name error ex) ha-831, ha-830, ra1000, rs900, rs300, g100sr, cafu15")
     end_point = "_count"
-    query = "{}{}/{}".format(parse[partner_id], model_name, end_point)
-    url = ELASTICSEARCH_SERVER_IP + query
-    res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.values()))
+    try:
+        query = "{}{}/{}".format(parse[partner_id], model_name, end_point)
+        url = ELASTICSEARCH_SERVER_IP + query
+        res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.values()))
+    except Exception as e:
+        raise e
     print(url)
     payload = PAYLOAD(request, partner_id, model_name).body()
     payload["count"] = res.json()['count']
@@ -191,9 +200,12 @@ async def qwe(partner_id: str, model_name: str, device_id: str, request: Request
     end_point = "_search"
     # params = "q=deviceId:{}&_source=@timestamp&sort=@timestamp:desc&size=1".format(device_id)
     params = "&size=1"
-    query = "{}{}/{}?{}".format(parse[partner_id], model_name, end_point, params)
-    url = ELASTICSEARCH_SERVER_IP + query
-    res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.values(), device=device_id))
+    try:
+        query = "{}{}/{}?{}".format(parse[partner_id], model_name, end_point, params)
+        url = ELASTICSEARCH_SERVER_IP + query
+        res = requests.post(url=url, auth=HTTPBasicAuth('elastic', 'rkwjs12#'), json=date_query(request.query_params.values(), device=device_id))
+    except Exception as e:
+        raise e
     print(url)
     payload = PAYLOAD(request, partner_id, model_name, device_id).body()
     payload["timestamp"] = str(datetime.datetime.strptime(

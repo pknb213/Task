@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <h1>Server Status{{id}}</h1>
+    <div class="container row">
+        <ul class="col-lg-3 bg-dark text-white">
+            <li class="">IP : {{c1r1[0]}}</li>
+            <li class="">Ping : {{c1r1[1]}}</li>
+            <li class="">ES : {{c1r1[2]}}</li>
+            <li class="">Kibana : {{c1r1[3]}}</li>
+        </ul>
+        <ul class="col-lg-3 bg-dark text-white">
+            <li class="">IP : {{c1r2[0]}}</li>
+            <li class="">Ping : {{c1r2[1]}}</li>
+            <li class="">ES : {{c1r2[2]}}</li>
+            <li class="">CA System : {{c1r2[3]}}</li>
+        </ul>
+        <ul class="col-lg-3 bg-dark text-white">
+            <li class="">IP : {{c1r3[0]}}</li>
+            <li class="">Ping : {{c1r3[1]}}</li>
+            <li class="">ES : {{c1r3[2]}}</li>
+        </ul>
+        <ul class="col-lg-3 bg-dark text-white">
+            <li class="">IP : {{c2r1[0]}}</li>
+            <li class="">Ping : {{c2r1[1]}}</li>
+            <li class="">ES : {{c2r1[2]}}</li>
+            <li class="">Kibana : {{c2r1[3]}}</li>
+        </ul>
+    </div>
+    <br/>
+    <div class="container row">
+        <ul class="col-lg-3 bg-dark text-white">
+            <li class="">IP : {{c2r2[0]}}</li>
+            <li class="">Ping : {{c2r2[1]}}</li>
+            <li class="">ES : {{c2r2[2]}}</li>
+        </ul>
+        <ul class="col-lg-3 bg-dark text-white">
+            <li class="">IP : {{c2r3[0]}}</li>
+            <li class="">Ping : {{c2r3[1]}}</li>
+            <li class="">ES : {{c2r3[2]}}</li>
+        </ul>
+    </div>
+</body>
+</html>
